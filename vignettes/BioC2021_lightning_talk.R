@@ -1,52 +1,16 @@
----
-title: "Using `nullranges::matchranges()` with `BentoBox`"
-author: "Eric S. Davis"
-date: "`r format(Sys.Date(), '%m/%d/%Y')`"
-output:
-  rmarkdown::html_document:
-    highlight: tango
-    toc: true
-    toc_float: true	
-    fig_width: 5
-    fig_height: 3
-vignette: |
-  %\VignetteEncoding{UTF-8}
-  %\VignetteIndexEntry{Using nullranges::matchranges() with BentoBox}
-  %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
-  chunk_output_type: console
----
-
-```{r}
+## -----------------------------------------------------------------------------
 knitr::opts_knit$set(global.device = TRUE)
-```
 
-My co-authors, Wancen Mu and Nicole Kramer, have given fantastic talks on the `nullranges` and `BentoBox` packages. This lightning talk will attempt to demonstrate both packages simultaneously. A toy dataset will be used to demonstrate how to generate covariate-matched, null-hypothesis GRanges with `nullranges::matchRanges()` and then visualize the results using the `BentoBox` framework.
-
-## Generating covariate-matched GRanges
-
-For this example lets use a utility function to create a simulated dataset:
-
-```{r, message=FALSE, warning=FALSE}
+## ---- message=FALSE, warning=FALSE--------------------------------------------
 set.seed(123)
 x <- Bioc2021::makeExampleMatchedDataSet(type = "GRanges")
 x
-```
 
-This creates a GRanges object with random ranges and 3 metadata colums (`feature1`, `color`, and `length`) that describe "features" of each range.
-
-Let's demonstrate generating a set of matched ranges by finding ranges that are `FALSE` for `feature1` but have the same distributions of `color` and `length`.
-
-Our `focal` set of interest is where feature1 is `TRUE`, and `pool` is all other ranges (where feature1 is `FALSE`):
-
-```{r, message=FALSE, warning=FALSE}
+## ---- message=FALSE, warning=FALSE--------------------------------------------
 focal <- x[x$feature1]
 pool <- x[!x$feature1]
-```
 
-We can use `nullranges::matchRanges()` to select a subset from pool that is distributionally matched in color and range length:
-
-```{r, message=FALSE, warning=FALSE, results='hold'}
+## ---- message=FALSE, warning=FALSE, results='hold'----------------------------
 library(nullranges)
 mgr <- matchRanges(focal = focal,
                    pool = pool,
@@ -55,32 +19,18 @@ mgr <- matchRanges(focal = focal,
                    replace = FALSE)
 
 mgr
-```
 
-`overview` can show how successful our matching was:
-
-```{r}
+## -----------------------------------------------------------------------------
 overview(mgr)
-```
 
-## Visualizing with BentoBox
-
-Defining the region to plot:
-
-```{r, message=FALSE, warning=FALSE}
+## ---- message=FALSE, warning=FALSE--------------------------------------------
 library(BentoBox)
 region <- bbParams(chrom = "chr1", chromstart = 1, chromend = 1000)
-```
 
-We can visualize these ranges by creating a `BentoBox` page:
-
-```{r, message=FALSE, warning=FALSE, fig.width=8.5, fig.height=6.5}
+## ---- message=FALSE, warning=FALSE, fig.width=8.5, fig.height=6.5-------------
 bbPageCreate(width = 8.5, height = 6.5, default.units = 'inches')
-```
 
-Visualize the `pool` GRanges:
-
-```{r, message=FALSE, warning=FALSE, results = 'hold', fig.width=8.5, fig.height=6.5}
+## ---- message=FALSE, warning=FALSE, results = 'hold', fig.width=8.5, fig.height=6.5----
 poolSet <- bbPlotRanges(data = pool,
                         params = region,
                         x = 1,
@@ -102,11 +52,8 @@ bbPlotText(label = "Pool Set",
            fontfamily = 'mono')
 
 
-```
 
-Visualize the `focal` GRanges of interest:
-
-```{r, message=FALSE, warning=FALSE, results = 'hold', fig.width=8.5, fig.height=6.5}
+## ---- message=FALSE, warning=FALSE, results = 'hold', fig.width=8.5, fig.height=6.5----
 focalSet <- bbPlotRanges(data = focal,
                          params = region,
                          x = 5,
@@ -126,11 +73,8 @@ bbPlotText(label = "Focal Set",
            fontcolor = "#1F78B4",
            fontface = "bold",
            fontfamily = 'mono')
-```
 
-And finally the `matched` GRanges:
-
-```{r, message=FALSE, warning=FALSE, results = 'hold', fig.width=8.5, fig.height=6.5}
+## ---- message=FALSE, warning=FALSE, results = 'hold', fig.width=8.5, fig.height=6.5----
 ## Matched set
 matchedSet <- bbPlotRanges(data = mgr,
                            params = region,
@@ -151,13 +95,8 @@ bbPlotText(label = "Matched Set",
            fontcolor = "#A6CEE3",
            fontface = "bold",
            fontfamily = 'mono')
-```
 
-Below our GRanges, we can use `BentoBox` to place ggplots created from the `nullranges` `plotPropensity()` and `plotCovariate()` functions.
-
-First lets plot propensity scores:
-
-```{r, message=FALSE, warning=FALSE, results='hold', fig.width=8.5, fig.height=6.5}
+## ---- message=FALSE, warning=FALSE, results='hold', fig.width=8.5, fig.height=6.5----
 library(ggplot2)
 smallText <- theme(legend.title = element_text(size=8),
                    legend.text=element_text(size=8),
@@ -187,11 +126,8 @@ bbPlotText(label = "~color + length",
             just = c("left", "bottom"),
             fontsize = 10,
             fontfamily = "mono")
-```
 
-plotting `color` and `length` covariates:
-
-```{r, message=FALSE, warning=FALSE, results='hold', fig.width=8.5, fig.height=6.5}
+## ---- message=FALSE, warning=FALSE, results='hold', fig.width=8.5, fig.height=6.5----
 
 ## Plot "color" covariate
 covColor <-
@@ -229,4 +165,4 @@ bbPlotText(label = covariates(mgr),
            just = c("left", "bottom"),
            fontsize = 10,
            fontfamily = "mono")
-```
+

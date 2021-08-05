@@ -77,6 +77,9 @@ makeExampleMatchedDataSet <- function(type = "GRanges") {
 
     ## Combine
     out <- c(focal, pool)
+
+    ## Add actually colors
+    out$color <- colors[out$color]
   }
 
   return(out)
