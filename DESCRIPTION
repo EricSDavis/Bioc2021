@@ -42,7 +42,7 @@ Imports:
     data.table,
     progress,
     ggridges
-Remotes: PhanstielLab, nullranges
+Remotes: PhanstielLab/BentoBox, nullranges/nullrangesData, nullranges/nullranges
 URL: https://github.com/EricSDavis/Bioc2021
 License: GPL (>= 3)
 Encoding: UTF-8
