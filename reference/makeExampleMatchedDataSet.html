@@ -153,19 +153,19 @@ input to <code>matchRanges()</code>.</p>
     <pre class="examples"><div class='input'><span class='co'>## Make examples for matchRanges()</span>
 <span class='fu'>makeExampleMatchedDataSet</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; GRanges object with 136 ranges and 3 metadata columns:
-#&gt;         seqnames    ranges strand |  feature1     color    length
-#&gt;            &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;logical&gt; &lt;integer&gt; &lt;integer&gt;
-#&gt;     [1]     chr1    92-200      * |      TRUE         3       109
-#&gt;     [2]     chr1    71-178      * |      TRUE         5       108
-#&gt;     [3]     chr1   747-902      * |      TRUE         1       156
-#&gt;     [4]     chr1   362-502      * |      TRUE         5       141
-#&gt;     [5]     chr1   339-406      * |      TRUE         5        68
-#&gt;     ...      ...       ...    ... .       ...       ...       ...
-#&gt;   [132]     chr1   511-606      * |     FALSE         5        96
-#&gt;   [133]     chr1   724-847      * |     FALSE         3       124
-#&gt;   [134]     chr1    72-172      * |     FALSE         3       101
-#&gt;   [135]     chr1   341-480      * |     FALSE         3       140
-#&gt;   [136]     chr1   674-734      * |     FALSE         5        61
+#&gt;         seqnames    ranges strand |  feature1       color    length
+#&gt;            &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;logical&gt; &lt;character&gt; &lt;integer&gt;
+#&gt;     [1]     chr1    92-200      * |      TRUE     #4fbe9b       109
+#&gt;     [2]     chr1    71-178      * |      TRUE     #d098d7       108
+#&gt;     [3]     chr1   747-902      * |      TRUE     #e19995       156
+#&gt;     [4]     chr1   362-502      * |      TRUE     #d098d7       141
+#&gt;     [5]     chr1   339-406      * |      TRUE     #d098d7        68
+#&gt;     ...      ...       ...    ... .       ...         ...       ...
+#&gt;   [132]     chr1   511-606      * |     FALSE     #d098d7        96
+#&gt;   [133]     chr1   724-847      * |     FALSE     #4fbe9b       124
+#&gt;   [134]     chr1    72-172      * |     FALSE     #4fbe9b       101
+#&gt;   [135]     chr1   341-480      * |     FALSE     #4fbe9b       140
+#&gt;   [136]     chr1   674-734      * |     FALSE     #d098d7        61
 #&gt;   -------
 #&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</div><div class='input'><span class='fu'>makeExampleMatchedDataSet</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>'data.frame'</span><span class='op'>)</span> |&gt; <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;     color      size   set
@@ -202,19 +202,19 @@ input to <code>matchRanges()</code>.</p>
 #&gt; 135  #6eb3d9  0.820625        pool
 #&gt; 136  #e19995  0.834979        pool</div><div class='input'><span class='fu'>makeExampleMatchedDataSet</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>'GRanges'</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; GRanges object with 136 ranges and 3 metadata columns:
-#&gt;         seqnames    ranges strand |  feature1     color    length
-#&gt;            &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;logical&gt; &lt;integer&gt; &lt;integer&gt;
-#&gt;     [1]     chr1    92-200      * |      TRUE         3       109
-#&gt;     [2]     chr1    71-178      * |      TRUE         5       108
-#&gt;     [3]     chr1   747-902      * |      TRUE         1       156
-#&gt;     [4]     chr1   362-502      * |      TRUE         5       141
-#&gt;     [5]     chr1   339-406      * |      TRUE         5        68
-#&gt;     ...      ...       ...    ... .       ...       ...       ...
-#&gt;   [132]     chr1   511-606      * |     FALSE         5        96
-#&gt;   [133]     chr1   724-847      * |     FALSE         3       124
-#&gt;   [134]     chr1    72-172      * |     FALSE         3       101
-#&gt;   [135]     chr1   341-480      * |     FALSE         3       140
-#&gt;   [136]     chr1   674-734      * |     FALSE         5        61
+#&gt;         seqnames    ranges strand |  feature1       color    length
+#&gt;            &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;logical&gt; &lt;character&gt; &lt;integer&gt;
+#&gt;     [1]     chr1    92-200      * |      TRUE     #4fbe9b       109
+#&gt;     [2]     chr1    71-178      * |      TRUE     #d098d7       108
+#&gt;     [3]     chr1   747-902      * |      TRUE     #e19995       156
+#&gt;     [4]     chr1   362-502      * |      TRUE     #d098d7       141
+#&gt;     [5]     chr1   339-406      * |      TRUE     #d098d7        68
+#&gt;     ...      ...       ...    ... .       ...         ...       ...
+#&gt;   [132]     chr1   511-606      * |     FALSE     #d098d7        96
+#&gt;   [133]     chr1   724-847      * |     FALSE     #4fbe9b       124
+#&gt;   [134]     chr1    72-172      * |     FALSE     #4fbe9b       101
+#&gt;   [135]     chr1   341-480      * |     FALSE     #4fbe9b       140
+#&gt;   [136]     chr1   674-734      * |     FALSE     #d098d7        61
 #&gt;   -------
 #&gt;   seqinfo: 1 sequence from an unspecified genome; no seqlengths</div><div class='input'>
 </div></pre>
