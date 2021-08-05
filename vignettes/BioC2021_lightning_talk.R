@@ -1,4 +1,4 @@
-## -----------------------------------------------------------------------------
+## ---- include=FALSE-----------------------------------------------------------
 knitr::opts_knit$set(global.device = TRUE)
 
 ## ---- message=FALSE, warning=FALSE--------------------------------------------
@@ -27,10 +27,10 @@ overview(mgr)
 library(BentoBox)
 region <- bbParams(chrom = "chr1", chromstart = 1, chromend = 1000)
 
-## ---- message=FALSE, warning=FALSE, fig.width=8.5, fig.height=6.5-------------
+## ---- message=FALSE, warning=FALSE, fig.width=10, fig.height=10---------------
 bbPageCreate(width = 8.5, height = 6.5, default.units = 'inches')
 
-## ---- message=FALSE, warning=FALSE, results = 'hold', fig.width=8.5, fig.height=6.5----
+## ---- message=FALSE, warning=FALSE, results = 'hold', fig.width=10, fig.height=10----
 poolSet <- bbPlotRanges(data = pool,
                         params = region,
                         x = 1,
@@ -53,7 +53,7 @@ bbPlotText(label = "Pool Set",
 
 
 
-## ---- message=FALSE, warning=FALSE, results = 'hold', fig.width=8.5, fig.height=6.5----
+## ---- message=FALSE, warning=FALSE, results = 'hold', fig.width=10, fig.height=10----
 focalSet <- bbPlotRanges(data = focal,
                          params = region,
                          x = 5,
@@ -74,7 +74,7 @@ bbPlotText(label = "Focal Set",
            fontface = "bold",
            fontfamily = 'mono')
 
-## ---- message=FALSE, warning=FALSE, results = 'hold', fig.width=8.5, fig.height=6.5----
+## ---- message=FALSE, warning=FALSE, results = 'hold', fig.width=10, fig.height=10----
 ## Matched set
 matchedSet <- bbPlotRanges(data = mgr,
                            params = region,
@@ -96,7 +96,7 @@ bbPlotText(label = "Matched Set",
            fontface = "bold",
            fontfamily = 'mono')
 
-## ---- message=FALSE, warning=FALSE, results='hold', fig.width=8.5, fig.height=6.5----
+## ---- message=FALSE, warning=FALSE, results='hold', fig.width=10, fig.height=10----
 library(ggplot2)
 smallText <- theme(legend.title = element_text(size=8),
                    legend.text=element_text(size=8),
@@ -127,7 +127,7 @@ bbPlotText(label = "~color + length",
             fontsize = 10,
             fontfamily = "mono")
 
-## ---- message=FALSE, warning=FALSE, results='hold', fig.width=8.5, fig.height=6.5----
+## ---- message=FALSE, warning=FALSE, results='hold', fig.width=10, fig.height=10----
 
 ## Plot "color" covariate
 covColor <-
@@ -165,4 +165,7 @@ bbPlotText(label = covariates(mgr),
            just = c("left", "bottom"),
            fontsize = 10,
            fontfamily = "mono")
+
+## ---- fig.width=10, fig.height=10---------------------------------------------
+bbPageGuideHide()
 

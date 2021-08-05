@@ -13,8 +13,10 @@ articles:
       - BioC2021_lightning_talk
 
 figures:
-  fig.width: 5.5
-  fig.retina: 1
+  fig.height: 7
+  fig.width: 8.2
+  fig.asp: ~
+  dpi: 150
 
 reference:
   - title: "Utility functions"

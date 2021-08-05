@@ -17,11 +17,11 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r}
+```{r, include=FALSE}
 knitr::opts_knit$set(global.device = TRUE)
 ```
 
-My co-authors, Wancen Mu and Nicole Kramer, have given fantastic talks on the `nullranges` and `BentoBox` packages. This lightning talk will attempt to demonstrate both packages simultaneously. A toy dataset will be used to demonstrate how to generate covariate-matched, null-hypothesis GRanges with `nullranges::matchRanges()` and then visualize the results using the `BentoBox` framework.
+This lightning talk will attempt to use a toy dataset to generate covariate-matched, null-hypothesis GRanges with `nullranges::matchRanges()` and then visualize the results using the `BentoBox` framework.
 
 ## Generating covariate-matched GRanges
 
@@ -74,13 +74,13 @@ region <- bbParams(chrom = "chr1", chromstart = 1, chromend = 1000)
 
 We can visualize these ranges by creating a `BentoBox` page:
 
-```{r, message=FALSE, warning=FALSE, fig.width=8.5, fig.height=6.5}
+```{r, message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
 bbPageCreate(width = 8.5, height = 6.5, default.units = 'inches')
 ```
 
 Visualize the `pool` GRanges:
 
-```{r, message=FALSE, warning=FALSE, results = 'hold', fig.width=8.5, fig.height=6.5}
+```{r, message=FALSE, warning=FALSE, results = 'hold', fig.width=10, fig.height=10}
 poolSet <- bbPlotRanges(data = pool,
                         params = region,
                         x = 1,
@@ -106,7 +106,7 @@ bbPlotText(label = "Pool Set",
 
 Visualize the `focal` GRanges of interest:
 
-```{r, message=FALSE, warning=FALSE, results = 'hold', fig.width=8.5, fig.height=6.5}
+```{r, message=FALSE, warning=FALSE, results = 'hold', fig.width=10, fig.height=10}
 focalSet <- bbPlotRanges(data = focal,
                          params = region,
                          x = 5,
@@ -130,7 +130,7 @@ bbPlotText(label = "Focal Set",
 
 And finally the `matched` GRanges:
 
-```{r, message=FALSE, warning=FALSE, results = 'hold', fig.width=8.5, fig.height=6.5}
+```{r, message=FALSE, warning=FALSE, results = 'hold', fig.width=10, fig.height=10}
 ## Matched set
 matchedSet <- bbPlotRanges(data = mgr,
                            params = region,
@@ -157,7 +157,7 @@ Below our GRanges, we can use `BentoBox` to place ggplots created from the `null
 
 First lets plot propensity scores:
 
-```{r, message=FALSE, warning=FALSE, results='hold', fig.width=8.5, fig.height=6.5}
+```{r, message=FALSE, warning=FALSE, results='hold', fig.width=10, fig.height=10}
 library(ggplot2)
 smallText <- theme(legend.title = element_text(size=8),
                    legend.text=element_text(size=8),
@@ -191,7 +191,7 @@ bbPlotText(label = "~color + length",
 
 plotting `color` and `length` covariates:
 
-```{r, message=FALSE, warning=FALSE, results='hold', fig.width=8.5, fig.height=6.5}
+```{r, message=FALSE, warning=FALSE, results='hold', fig.width=10, fig.height=10}
 
 ## Plot "color" covariate
 covColor <-
@@ -230,3 +230,11 @@ bbPlotText(label = covariates(mgr),
            fontsize = 10,
            fontfamily = "mono")
 ```
+
+When the plot is finished you can remove the page guides:
+
+```{r, fig.width=10, fig.height=10}
+bbPageGuideHide()
+```
+
+And now your plot is publication-ready!
