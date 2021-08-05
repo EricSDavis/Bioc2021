@@ -3,6 +3,5 @@
 export(makeExampleMatchedDataSet)
 import(GenomicRanges)
 import(IRanges)
-import(InteractionSet)
 import(S4Vectors)
 import(data.table, except = c(between, shift, first, second, indices))

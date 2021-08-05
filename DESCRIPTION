@@ -17,7 +17,6 @@ Suggests:
     EnsDb.Hsapiens.v86,
     microbenchmark,
     patchwork,
-    hictoolsr,
     BentoBox,
     magrittr,
     nullranges

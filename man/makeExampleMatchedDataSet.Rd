@@ -26,6 +26,5 @@ makeExampleMatchedDataSet(type = 'data.frame') |> head()
 makeExampleMatchedDataSet(type = 'data.table')
 makeExampleMatchedDataSet(type = 'DataFrame')
 makeExampleMatchedDataSet(type = 'GRanges')
-makeExampleMatchedDataSet(type = 'GInteractions')
 
 }
