@@ -16,6 +16,7 @@ Suggests:
 Imports:
     nullranges,
     BentoBox
+Remotes: PhanstielLab/BentoBox, nullranges/nullranges
 URL: https://github.com/EricSDavis/Bioc2021
 License: GPL (>= 3)
 Encoding: UTF-8
