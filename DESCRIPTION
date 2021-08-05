@@ -12,8 +12,7 @@ Suggests:
     IRanges,
     GenomicRanges,
     InteractionSet,
-    S4Vectors
-Imports:
+    S4Vectors,
     nullranges,
     BentoBox
 Remotes: PhanstielLab/BentoBox, nullranges/nullranges
