@@ -1,0 +1,20 @@
+---
+title: "Using `nullranges::matchranges()` with `BentoBox`"
+author: "Eric S. Davis"
+date: "`r format(Sys.Date(), '%m/%d/%Y')`"
+output:
+  rmarkdown::html_document:
+    highlight: tango
+    toc: true
+    toc_float: true	
+    fig_width: 5
+    fig_height: 3
+vignette: |
+  %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{Using `nullranges::matchranges()` with `BentoBox`}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+My co-authors, Wancen Mu and Nicole Kramer, have given fantastic talks on the `nullranges` and `BentoBox` packages. This lightning talk will attempt to demonstrate both packages simultaneously. A toy dataset will be used to demonstrate how to generate covariate-matched, null-hypothesis GRanges with `nullranges::matchRanges()` and then visualize the results using the `BentoBox` framework.

@@ -1,0 +1,25 @@
+Package: Bioc2021
+Title: Collection of BioC2021 resources
+Version: 0.0.1
+Authors@R: c(
+    person("Eric", "Davis", role = c("aut", "cre"),
+      email = "michaelisaiahlove@gmail.com",
+      comment = c(ORCID = "0000-0003-4051-3217")))
+Description: Collection of BioC2021 resources
+Suggests:
+    rmarkdown,
+    usethis,
+    IRanges,
+    GenomicRanges,
+    InteractionSet,
+    S4Vectors
+Imports:
+    nullranges,
+    BentoBox
+URL: https://github.com/EricSDavis/Bioc2021
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1

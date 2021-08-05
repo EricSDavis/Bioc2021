@@ -1,0 +1,22 @@
+url: https://EricSDavis.github.io/Bioc2021
+
+title: Bioc2021
+
+authors:
+  Eric Davis:
+    href: https://ericscottdavis.com
+
+articles:
+  - title: Articles
+    navbar: ~
+    contents:
+      - BioC2021_lightning_talk
+
+figures:
+  fig.width: 5.5
+  fig.retina: 1
+
+reference:
+  - title: "Utility functions"
+    contents:
+      - makeExampleMatchedDataSet
