@@ -92,14 +92,12 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_knit.html">opts_knit</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>global.device <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>My co-authors, Wancen Mu and Nicole Kramer, have given fantastic talks on the <code>nullranges</code> and <code>BentoBox</code> packages. This lightning talk will attempt to demonstrate both packages simultaneously. A toy dataset will be used to demonstrate how to generate covariate-matched, null-hypothesis GRanges with <code><a href="https://rdrr.io/pkg/nullranges/man/matchRanges.html">nullranges::matchRanges()</a></code> and then visualize the results using the <code>BentoBox</code> framework.</p>
+<p>This lightning talk will attempt to use a toy dataset to generate covariate-matched, null-hypothesis GRanges with <code><a href="https://rdrr.io/pkg/nullranges/man/matchRanges.html">nullranges::matchRanges()</a></code> and then visualize the results using the <code>BentoBox</code> framework.</p>
 <div id="generating-covariate-matched-granges" class="section level2">
 <h2 class="hasAnchor">
 <a href="#generating-covariate-matched-granges" class="anchor"></a>Generating covariate-matched GRanges</h2>
 <p>For this example lets use a utility function to create a simulated dataset:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">Bioc2021</span><span class="fu">::</span><span class="fu"><a href="../reference/makeExampleMatchedDataSet.html">makeExampleMatchedDataSet</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"GRanges"</span><span class="op">)</span>
 <span class="va">x</span></code></pre></div>
@@ -122,11 +120,11 @@
 <p>This creates a GRanges object with random ranges and 3 metadata colums (<code>feature1</code>, <code>color</code>, and <code>length</code>) that describe “features” of each range.</p>
 <p>Let’s demonstrate generating a set of matched ranges by finding ranges that are <code>FALSE</code> for <code>feature1</code> but have the same distributions of <code>color</code> and <code>length</code>.</p>
 <p>Our <code>focal</code> set of interest is where feature1 is <code>TRUE</code>, and <code>pool</code> is all other ranges (where feature1 is <code>FALSE</code>):</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">focal</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">feature1</span><span class="op">]</span>
 <span class="va">pool</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="op">!</span><span class="va">x</span><span class="op">$</span><span class="va">feature1</span><span class="op">]</span></code></pre></div>
 <p>We can use <code><a href="https://rdrr.io/pkg/nullranges/man/matchRanges.html">nullranges::matchRanges()</a></code> to select a subset from pool that is distributionally matched in color and range length:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nullranges/nullranges">nullranges</a></span><span class="op">)</span>
 <span class="va">mgr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nullranges/man/matchRanges.html">matchRanges</a></span><span class="op">(</span>focal <span class="op">=</span> <span class="va">focal</span>,
                    pool <span class="op">=</span> <span class="va">pool</span>,
@@ -152,7 +150,7 @@
 ##   -------
 ##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
 <p><code>overview</code> can show how successful our matching was:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/nullranges/man/overview.html">overview</a></span><span class="op">(</span><span class="va">mgr</span><span class="op">)</span></code></pre></div>
 <pre><code>## MatchedGRanges object: 
 ##        set   N color.#4fbe9b color.#6eb3d9 color.#adaf64 color.#d098d7
@@ -176,15 +174,15 @@
 <h2 class="hasAnchor">
 <a href="#visualizing-with-bentobox" class="anchor"></a>Visualizing with BentoBox</h2>
 <p>Defining the region to plot:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://phanstiellab.github.io/BentoBox">BentoBox</a></span><span class="op">)</span>
 <span class="va">region</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://phanstiellab.github.io/bentobox/reference/bbParams.html">bbParams</a></span><span class="op">(</span>chrom <span class="op">=</span> <span class="st">"chr1"</span>, chromstart <span class="op">=</span> <span class="fl">1</span>, chromend <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></code></pre></div>
 <p>We can visualize these ranges by creating a <code>BentoBox</code> page:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://phanstiellab.github.io/bentobox/reference/bbPageCreate.html">bbPageCreate</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">8.5</span>, height <span class="op">=</span> <span class="fl">6.5</span>, default.units <span class="op">=</span> <span class="st">'inches'</span><span class="op">)</span></code></pre></div>
-<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-7-1.png"><!-- --></p>
+<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-7-1.png" width="1500"></p>
 <p>Visualize the <code>pool</code> GRanges:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">poolSet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://phanstiellab.github.io/bentobox/reference/bbPlotRanges.html">bbPlotRanges</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pool</span>,
                         params <span class="op">=</span> <span class="va">region</span>,
                         x <span class="op">=</span> <span class="fl">1</span>,
@@ -204,9 +202,9 @@
            fontcolor <span class="op">=</span> <span class="st">"#33A02C"</span>,
            fontface <span class="op">=</span> <span class="st">"bold"</span>,
            fontfamily <span class="op">=</span> <span class="st">'mono'</span><span class="op">)</span></code></pre></div>
-<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-8-1.png"><!-- --></p>
+<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-8-1.png" width="1500"></p>
 <p>Visualize the <code>focal</code> GRanges of interest:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">focalSet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://phanstiellab.github.io/bentobox/reference/bbPlotRanges.html">bbPlotRanges</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">focal</span>,
                          params <span class="op">=</span> <span class="va">region</span>,
                          x <span class="op">=</span> <span class="fl">5</span>,
@@ -226,9 +224,9 @@
            fontcolor <span class="op">=</span> <span class="st">"#1F78B4"</span>,
            fontface <span class="op">=</span> <span class="st">"bold"</span>,
            fontfamily <span class="op">=</span> <span class="st">'mono'</span><span class="op">)</span></code></pre></div>
-<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-9-1.png"><!-- --></p>
+<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-9-1.png" width="1500"></p>
 <p>And finally the <code>matched</code> GRanges:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Matched set</span>
 <span class="va">matchedSet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://phanstiellab.github.io/bentobox/reference/bbPlotRanges.html">bbPlotRanges</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mgr</span>,
                            params <span class="op">=</span> <span class="va">region</span>,
@@ -249,10 +247,10 @@
            fontcolor <span class="op">=</span> <span class="st">"#A6CEE3"</span>,
            fontface <span class="op">=</span> <span class="st">"bold"</span>,
            fontfamily <span class="op">=</span> <span class="st">'mono'</span><span class="op">)</span></code></pre></div>
-<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-10-1.png"><!-- --></p>
+<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-10-1.png" width="1500"></p>
 <p>Below our GRanges, we can use <code>BentoBox</code> to place ggplots created from the <code>nullranges</code> <code><a href="https://rdrr.io/pkg/nullranges/man/plotPropensity.html">plotPropensity()</a></code> and <code><a href="https://rdrr.io/pkg/nullranges/man/plotCovariate.html">plotCovariate()</a></code> functions.</p>
 <p>First lets plot propensity scores:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="va">smallText</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">8</span><span class="op">)</span>,
                    legend.text<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">8</span><span class="op">)</span>,
@@ -282,9 +280,9 @@
             just <span class="op">=</span> <span class="fu"><a href="https://phanstiellab.github.io/bentobox/reference/c.html">c</a></span><span class="op">(</span><span class="st">"left"</span>, <span class="st">"bottom"</span><span class="op">)</span>,
             fontsize <span class="op">=</span> <span class="fl">10</span>,
             fontfamily <span class="op">=</span> <span class="st">"mono"</span><span class="op">)</span></code></pre></div>
-<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-11-1.png"><!-- --></p>
+<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-11-1.png" width="1500"></p>
 <p>plotting <code>color</code> and <code>length</code> covariates:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Plot "color" covariate</span>
 <span class="va">covColor</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="https://rdrr.io/pkg/nullranges/man/plotCovariate.html">plotCovariate</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">mgr</span>, covar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/nullranges/man/covariates.html">covariates</a></span><span class="op">(</span><span class="va">mgr</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, sets<span class="op">=</span><span class="fu"><a href="https://phanstiellab.github.io/bentobox/reference/c.html">c</a></span><span class="op">(</span><span class="st">'f'</span>,<span class="st">'m'</span>,<span class="st">'p'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -321,7 +319,12 @@
            just <span class="op">=</span> <span class="fu"><a href="https://phanstiellab.github.io/bentobox/reference/c.html">c</a></span><span class="op">(</span><span class="st">"left"</span>, <span class="st">"bottom"</span><span class="op">)</span>,
            fontsize <span class="op">=</span> <span class="fl">10</span>,
            fontfamily <span class="op">=</span> <span class="st">"mono"</span><span class="op">)</span></code></pre></div>
-<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-12-1.png"><!-- --></p>
+<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-12-1.png" width="1500"></p>
+<p>When the plot is finished you can remove the page guides:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://phanstiellab.github.io/bentobox/reference/bbPageGuideHide.html">bbPageGuideHide</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-13-1.png" width="1500"><img src="BioC2021_lightning_talk_files/figure-html/unnamed-chunk-13-2.png" width="1500"></p>
+<p>And now your plot is publication-ready!</p>
 </div>
   </div>
 
