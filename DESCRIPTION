@@ -6,6 +6,12 @@ Authors@R: c(
       email = "ericscottdavis@outlook.com",
       comment = c(ORCID = "0000-0003-4051-3217")))
 Description: Collection of BioC2021 resources.
+biocViews: 
+    Visualization, 
+    GenomeAnnotation, 
+    FunctionalGenomics, 
+    GenomeAssembly,
+    HiC
 Suggests:
     testthat,
     knitr,
@@ -36,7 +42,7 @@ Imports:
     data.table,
     progress,
     ggridges
-Remotes: PhanstielLab/BentoBox, nullranges/nullranges, LTLA/InteractionSet
+Remotes: PhanstielLab/BentoBox, nullranges/nullranges
 URL: https://github.com/EricSDavis/Bioc2021
 License: GPL (>= 3)
 Encoding: UTF-8
