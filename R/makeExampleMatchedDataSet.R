@@ -17,13 +17,11 @@
 #' makeExampleMatchedDataSet(type = 'data.table')
 #' makeExampleMatchedDataSet(type = 'DataFrame')
 #' makeExampleMatchedDataSet(type = 'GRanges')
-#' makeExampleMatchedDataSet(type = 'GInteractions')
 #'
 #' @rdname makeExampleMatchedDataSet
 #' @rawNamespace import(data.table, except = c(between, shift, first, second, indices))
 #' @import IRanges
 #' @import GenomicRanges
-#' @import InteractionSet
 #' @import S4Vectors
 #' @export
 makeExampleMatchedDataSet <- function(type = "GRanges") {
@@ -32,8 +30,7 @@ makeExampleMatchedDataSet <- function(type = "GRanges") {
   type <- match.arg(type, choices = c('data.frame',
                                       'data.table',
                                       'DataFrame',
-                                      'GRanges',
-                                      'GInteractions'))
+                                      'GRanges'))
 
   ## Define colors
   colors <- c("#e19995", "#adaf64", "#4fbe9b", "#6eb3d9", "#d098d7")
@@ -77,43 +74,6 @@ makeExampleMatchedDataSet <- function(type = "GRanges") {
     ## Add width to metadata
     pool$length <- width(pool)
     focal$length <- width(focal)
-
-    ## Combine
-    out <- c(focal, pool)
-  }
-
-  ## Generate example GInteractions
-  if (identical(type, 'GInteractions')) {
-
-    set.seed(5)
-    pool <- GInteractions(
-      anchor1 = GRanges(seqnames = "chr1",
-                        ranges = IRanges(start = sample(1:990, 120, replace = TRUE),
-                                         width = 10)),
-      anchor2 = GRanges(seqnames = "chr1",
-                        ranges = IRanges(start = sample(1:990, 120, replace = TRUE),
-                                         width = 10)),
-      mode = "strict",
-      feature1 = FALSE,
-      color = sample(1:5, 120, replace = TRUE)
-    )
-
-    focal <- GInteractions(
-      anchor1 = GRanges(seqnames = "chr1",
-                        ranges = IRanges(start = sample(1:990, 16, replace = TRUE),
-                                         width = 10)),
-      anchor2 = GRanges(seqnames = "chr1",
-                        ranges = IRanges(start = sample(1:990, 16, replace = TRUE),
-                                         width = 10)),
-      mode = "strict",
-      feature1 = TRUE,
-      color = sample(1:5, 16, replace = TRUE)
-    )
-
-
-    ## Add distance to metadata
-    pool$distance <- pairdist(pool)
-    focal$distance <- pairdist(focal)
 
     ## Combine
     out <- c(focal, pool)
